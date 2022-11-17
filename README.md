@@ -27,3 +27,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 2.)   Set up a new user and group in IAM to be able to make API requests to the AWS account from GitHub Actions. Secrets / keys stored in GitHub repo. 
 
 3.)   In dockerfile, exposed port 80
+
+## Deploy project to AWS
+
+The creation of the deploy.yaml file is what finally syncs my pushes to the main branch to the AWS Elastic Beanstalk application. Below is a list of actions needed to get this deployment to work:
+
+1.)   Log in to docker
+
+2.)   Build the docker image
+
+3.)   Run the tests 
+
+4.)   Generate a deployment package 
+
+5.)   Use a script to assist with deploying to Elastic Beanstalk. Takes in parameters, uploads to S3, creates a new version of Elastic Beanstalk, then deploys that version to the environment. einaregilsson/beanstalk-deploy
+
+6.)   set variables that beanstalk-deploy will use
