@@ -25,3 +25,5 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 1.)   Created an AWS Elastic Beanstalk application and environment un US-West-2, platform = Docker running on 64bit Amazon Linux 2/3.5.1. This also initialized the S3 bucket for me. 
 
 2.)   Set up a new user and group in IAM to be able to make API requests to the AWS account from GitHub Actions. Secrets / keys stored in GitHub repo. 
+
+3.)   In dockerfile, exposed port 80
