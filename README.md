@@ -17,3 +17,5 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ##  Set up for production
 
 1.)   Creating prod Dockerfile. Multi-step build. Using node:19-alpine to install deps and build, then copy over build folder to a nginx container.
+
+2.)    Push up local project to Github repository. Jmorg2397/personal-webpage
