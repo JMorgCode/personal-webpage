@@ -59,3 +59,9 @@ The creation of the deploy.yaml file is what finally syncs my pushes to the main
 ### Dockerizing the react app in development
 
 1.) Created individual dev dockerfiles for the client, server, and worker. 
+
+2.) Created a docker-compose file that handles services, setting environment variables, volumes, and exposing ports.  
+
+3.) adding an nginx server that will route requests to either the react server or express server. 
+
+4.) Now have 4 seperate containers / services: the client, express server, nginx server, and worker. Each one has been dockerized with a dev dockerfile for each. 
