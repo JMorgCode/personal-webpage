@@ -2,7 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). The idea is to create a react webapp locally and then deploy it live using Docker, Kubernetes, and AWS. Below is documentation on the steps taken to get to the final product, or at least an attempt to get to a final product.
 
-##  Local setup
+## Deploying Simple React App to AWS
+
+###  Local setup
 
 1.)   create-react-app used to initialize a basic react app.
 
@@ -14,13 +16,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 5.)   updated docker-compose file to also have a container that runs tests. docker-compose will now start up two seperate containers, one for hosting the server and one for running tests. 
 
-##  Set up Github repo for production
+###  Set up Github repo for production
 
 1.)   Creating prod Dockerfile. Multi-step build. Using node:19-alpine to install deps and build, then copy over build folder to a nginx container.
 
 2.)    Push up local project to Github repository. Jmorg2397/personal-webpage
 
-##  Set up AWS 
+###  Set up AWS 
 
 1.)   Created an AWS Elastic Beanstalk application and environment un US-West-2, platform = Docker running on 64bit Amazon Linux 2/3.5.1. This also initialized the S3 bucket for me. 
 
@@ -28,7 +30,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 3.)   In dockerfile, exposed port 80
 
-## Deploy project to AWS
+### Deploy project to AWS
 
 The creation of the deploy.yaml file is what finally syncs my pushes to the main branch to the AWS Elastic Beanstalk application. Below is a list of actions needed to get this deployment to work:
 
@@ -43,3 +45,17 @@ The creation of the deploy.yaml file is what finally syncs my pushes to the main
 5.)   Use a script to assist with deploying to Elastic Beanstalk. Takes in parameters, uploads to S3, creates a new version of Elastic Beanstalk, then deploys that version to the environment. einaregilsson/beanstalk-deploy
 
 6.)   set variables that beanstalk-deploy will use
+
+##  Adding Complexity: Multi-Container Application
+
+### Creating Worker Process
+
+1.)   Created the worker process with a function that calculates fib values when it is given a specific index
+
+2.)   Set up the Express server
+
+3.)   Create the react app, render pages, and set up routing
+
+### Dockerizing the react app in development
+
+1.) Created individual dev dockerfiles for the client, server, and worker. 
