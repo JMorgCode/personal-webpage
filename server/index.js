@@ -19,7 +19,6 @@ const pgClient = new Pool({
   port: keys.pgPort,
 });
 
-// on connect is to delay the table query until after a connection is made.
 pgClient.on("connect", (client) => {
   client
     .query("CREATE TABLE IF NOT EXISTS values (number INT)")
