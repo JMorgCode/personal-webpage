@@ -58,15 +58,32 @@ The creation of the deploy.yaml file is what finally syncs my pushes to the main
 
 ### Dockerizing the react app in development
 
-1.) Created individual dev dockerfiles for the client, server, and worker. 
+1.)   Created individual dev dockerfiles for the client, server, and worker. 
 
-2.) Created a docker-compose file that handles services, setting environment variables, volumes, and exposing ports.  
+2.)   Created a docker-compose file that handles services, setting environment variables, volumes, and exposing ports.  
 
-3.) adding an nginx server that will route requests to either the react server or express server. 
+3.)   adding an nginx server that will route requests to either the react server or express server. 
 
-4.) Now have 4 seperate containers / services: the client, express server, nginx server, and worker. Each one has been dockerized with a dev dockerfile for each. 
+4.)   Now have 4 seperate containers / services: the client, express server, nginx server, and worker. Each one has been dockerized with a dev dockerfile for each. 
 
 ### Setting up multi-container app for production
 
-1.) Built out my images and pushed to docker hub
+1.)   Created production dockerfiles for each container (very similar to dev dockerfiles)
 
+2.)   Created docker-compose production file
+
+3.)   Set up the deploy.yaml file for github actions to build and push docker images
+
+### AWS Setup for multi-container app
+
+1.)   Created Elastic Beanstalk environment and application
+
+2.)   Created Postgres database using RDS
+
+3.)   Created an ElastiCache Redis instance
+
+4.)   Created a security group so that all of these istances can communicate
+
+5.)   Set environment variables inside the EB environment
+
+6.)   Updated the deploy.yaml file to deploy to EB

@@ -1,0 +1,39 @@
+name: Deploy MultiDocker
+on:
+  push:
+    branches:
+      - main
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - run: docker build -t jmorg2397/react-webapp -f ./client/Dockerfile.dev ./client
+      - run: docker run -e CI=true jmorg2397/react-webapp npm test
+ 
+      - run: docker build -t jmorg2397/multi-client ./client
+      - run: docker build -t jmorg2397/multi-nginx ./nginx
+      - run: docker build -t jmorg2397/multi-server ./server
+      - run: docker build -t jmorg2397/multi-worker ./worker
+ 
+      - run: docker push jmorg2397/multi-client
+      - run: docker push jmorg2397/multi-nginx
+      - run: docker push jmorg2397/multi-server
+      - run: docker push jmorg2397/multi-worker
+ 
+      - name: Generate deployment package
+        run: zip -r deploy.zip . -x '*.git*'
+ 
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v18
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+          application_name: personal-react-webpage
+          environment_name: Personalreactwebpage-env-1
+          existing_bucket_name: elasticbeanstalk-us-west-2-268687543259
+          region: us-west-2
+          version_label: ${{ github.sha }}
+          deployment_package: deploy.zip
