@@ -65,3 +65,8 @@ The creation of the deploy.yaml file is what finally syncs my pushes to the main
 3.) adding an nginx server that will route requests to either the react server or express server. 
 
 4.) Now have 4 seperate containers / services: the client, express server, nginx server, and worker. Each one has been dockerized with a dev dockerfile for each. 
+
+### Setting up multi-container app for production
+
+1.) Built out my images and pushed to docker hub
+
